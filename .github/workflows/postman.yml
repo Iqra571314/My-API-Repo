@@ -1,1 +1,13 @@
+name: Automated API Tests Using Postman CLI (Windows)
 
+on: push
+
+jobs:
+  automated-api-tests:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Postman CLI
+        run: winget install --id Postman.PostmanCLI --accept-source-agreements --silent
+      - name: Run API Tests
+        run: postman collection run "32416130-03f1051f-3004-46ea-bc25-4c8e13dfd987" --api-key ${{ secrets.POSTMAN_API_KEY }}
